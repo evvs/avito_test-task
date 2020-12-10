@@ -4,10 +4,10 @@
   "description": "test task for avito :)",
   "private": "true",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start_client": "npm run start --prefix client",
     "start_server": "npm run start --prefix server",
-    "start": "concurrently --kill-others \"npm run start_client\" \"npm run start_server\""
+    "start": "concurrently --kill-others \"npm run start_client\" \"npm run start_server\"",
+    "install_node_modules": "npm install && npm install --prefix client && npm install --prefix server"
   },
   "repository": {
     "type": "git",
