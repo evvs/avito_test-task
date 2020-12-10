@@ -1,0 +1,21 @@
+{
+  "name": "avito_test-task",
+  "version": "0.1.0",
+  "description": "test task for avito :)",
+  "private": "true",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run start --prefix client",
+    "start_server": "npm run start --prefix server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evvs/avito_test-task.git"
+  },
+  "author": "evv",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/evvs/avito_test-task/issues"
+  },
+  "homepage": "https://github.com/evvs/avito_test-task#readme"
+}
