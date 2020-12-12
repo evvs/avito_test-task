@@ -2,7 +2,7 @@
   "name": "avito_test-task",
   "version": "0.1.0",
   "description": "test task for avito :)",
-  "private": "true",
+  "private": true,
   "scripts": {
     "start_client": "npm run start --prefix client",
     "start_server": "npm run start --prefix server",
