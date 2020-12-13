@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faClock, faStar } from '@fortawesome/free-solid-svg-icons';
-import { fetchNewsCardInfo, removeFromState } from '../../redux_slices/newsSlice';
-import Loader from '../Loader';
+import { fetchNewsCardInfo, removeFromState } from '@redux_slices/newsSlice';
+import Loader from '@components/Loader';
 import s from './newscard.module.scss';
 import convertUnixDate from '../../utils';
 

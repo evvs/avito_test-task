@@ -46,11 +46,15 @@ const newsSlice = createSlice({
       console.log(action);
     },
     [fetchNewsCardInfo.fulfilled]: (state, action) => {
-      const { id, ...rest } = action.payload;
-      state.newsById[id] = {
-        id,
-        ...rest,
-      };
+      try {
+        const { id, ...rest } = action.payload;
+        state.newsById[id] = {
+          id,
+          ...rest,
+        };
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
 });

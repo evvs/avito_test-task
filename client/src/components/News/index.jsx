@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
-import { fetchLatestNews } from '../../redux_slices/newsSlice';
-import NewsCard from '../NewsCard';
+import { fetchLatestNews } from '@redux_slices/newsSlice';
+import NewsCard from '@components/NewsCard';
 import s from './news.module.scss';
 
 const News = () => {
