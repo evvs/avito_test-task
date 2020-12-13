@@ -1,6 +1,7 @@
-const host = 'https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty&orderBy=%22$key%22&limitToFirst=5';
+const host = 'https://hacker-news.firebaseio.com';
+const prefix = 'v0';
 
 export default {
-  getLatestNews: () => host,
-  getCardInfo: (id) => `https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`,
+  getLatestNews: () => [host, prefix, 'newstories.json?print=pretty&orderBy=%22$key%22&limitToFirst=100'].join('/'),
+  getCardInfo: (id) => [host, prefix, `item/${id}.json?print=pretty`].join('/'),
 };

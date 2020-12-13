@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import newsReducer from './redux_slices/newsSlice';
+import uiStateReducer from './redux_slices/uiStateSlice';
 import './globalStyles.scss';
 import App from './App';
 
-const rootReducer = { news: newsReducer };
+const rootReducer = { news: newsReducer, UI: uiStateReducer };
 const store = configureStore({ reducer: rootReducer });
 
 ReactDOM.render(

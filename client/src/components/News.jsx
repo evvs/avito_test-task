@@ -13,7 +13,7 @@ const News = () => {
     const intervalId = setInterval(() => {
       console.log('from interval');
       dispatch(fetchLatestNews());
-    }, 5000);
+    }, 60000);
 
     return () => {
       clearInterval(intervalId);

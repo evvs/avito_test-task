@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import _ from 'lodash';
 import routes from '../routes';
 
 const initialState = {
@@ -10,7 +11,7 @@ const initialState = {
 export const fetchLatestNews = createAsyncThunk(
   'news/fetchLatestNews',
   // eslint-disable-next-line no-unused-vars
-  async (payload, thunkAPI) => {
+  async (payload, thunkApi) => {
     const { data } = await axios.get(routes.getLatestNews());
     return data;
   },
@@ -18,9 +19,12 @@ export const fetchLatestNews = createAsyncThunk(
 
 export const fetchNewsCardInfo = createAsyncThunk(
   'news/fetchNewsCardInfo',
-  // eslint-disable-next-line no-unused-vars
-  async (payload, thunkAPI) => {
+  async (payload, { dispatch }) => {
     const { data } = await axios.get(routes.getCardInfo(payload));
+    if (!data) {
+      console.log(data);
+      setTimeout(dispatch(fetchNewsCardInfo(payload)), 2000);
+    }
     return data;
   },
 );
@@ -28,19 +32,21 @@ export const fetchNewsCardInfo = createAsyncThunk(
 const newsSlice = createSlice({
   name: 'news',
   initialState,
-  reducers: {},
+  reducers: {
+    removeFromState: (state, action) => {
+      const withoutDeletedNews = _.omit(state.newsById, [action.payload]);
+      state.newsById = withoutDeletedNews;
+    },
+  },
   extraReducers: {
     [fetchLatestNews.fulfilled]: (state, action) => {
-      // eslint-disable-next-line no-param-reassign
       state.latestNewsIds = action.payload;
     },
     [fetchLatestNews.rejected]: (state, action) => {
       console.log(action);
     },
     [fetchNewsCardInfo.fulfilled]: (state, action) => {
-      // eslint-disable-next-line no-param-reassign
       const { id, ...rest } = action.payload;
-      // eslint-disable-next-line no-param-reassign
       state.newsById[id] = {
         id,
         ...rest,
@@ -48,5 +54,7 @@ const newsSlice = createSlice({
     },
   },
 });
+
+export const { removeFromState } = newsSlice.actions;
 
 export default newsSlice.reducer;
