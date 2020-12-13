@@ -21,8 +21,7 @@ export const fetchNewsCardInfo = createAsyncThunk(
   'news/fetchNewsCardInfo',
   async (payload, { dispatch }) => {
     const { data } = await axios.get(routes.getCardInfo(payload));
-    if (!data) {
-      console.log(data);
+    if (!data) { // in some cases we get empty(null) data, so retry after 2 sec
       setTimeout(dispatch(fetchNewsCardInfo(payload)), 2000);
     }
     return data;
@@ -52,7 +51,7 @@ const newsSlice = createSlice({
           id,
           ...rest,
         };
-      } catch (err) {
+      } catch (err) { // it usually appears when user spams refresh button
         console.log(err);
       }
     },
