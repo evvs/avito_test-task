@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from './containers/Header';
-import News from './containers/News';
+import Header from './components/Header';
+import News from './components/News';
 
 function App() {
   return (
