@@ -1,5 +1,5 @@
 import React from 'react';
-import headerLogo from '../img/hacker.svg';
+import headerLogo from '../../img/hacker.svg';
 import s from './header.module.scss';
 
 const Header = () => (
