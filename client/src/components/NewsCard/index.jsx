@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faClock, faStar } from '@fortawesome/free-solid-svg-icons';
-import { fetchNewsCardInfo, removeFromState } from '@redux_slices/newsSlice';
 import Loader from '@components/Loader';
+import { fetchNewsCardInfo, removeFromState } from '@redux_slices/newsSlice';
 import s from './newscard.module.scss';
 import convertUnixDate from '../../utils';
 

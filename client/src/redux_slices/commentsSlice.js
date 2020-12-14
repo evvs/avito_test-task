@@ -24,6 +24,9 @@ const fetchCommentSlice = createSlice({
   initialState,
   reducers: {
     clearCommentsState: () => initialState,
+    toggleIsOpen: ({ commentsUIstate }, { payload: id }) => {
+      commentsUIstate[id].isOpen = !commentsUIstate[id].isOpen;
+    },
   },
   extraReducers: {
     [fetchComment.fulfilled]: (state, action) => {
@@ -31,7 +34,11 @@ const fetchCommentSlice = createSlice({
         const { id, ...rest } = action.payload;
         state.commentsById[id] = {
           id,
+          kids: [],
           ...rest,
+        };
+        state.commentsUIstate[id] = {
+          isOpen: false,
         };
       } catch (err) {
         console.log(err);
@@ -43,6 +50,6 @@ const fetchCommentSlice = createSlice({
   },
 });
 
-export const { clearCommentsState } = fetchCommentSlice.actions;
+export const { clearCommentsState, toggleIsOpen } = fetchCommentSlice.actions;
 
 export default fetchCommentSlice.reducer;

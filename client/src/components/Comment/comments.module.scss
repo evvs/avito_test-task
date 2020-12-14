@@ -4,12 +4,23 @@
   overflow: hidden;
   .header {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     background-color: rgba(219, 219, 219, 0.5);
     font-size: 1.2rem;
     font-weight: bolder;
     color: rgba(0, 0, 0, 0.5);
+  }
+
+  .chevron {
+    margin-right: 5px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  .cursorPoiner {
+    cursor: pointer;
   }
 
   .text {
@@ -18,5 +29,12 @@
   .time {
     font-weight: bold;
     font-size: 1rem;
+  }
+  .footer {
+    display: flex;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: rgba(159, 161, 166, 0.5);
+    cursor: pointer;
   }
 }

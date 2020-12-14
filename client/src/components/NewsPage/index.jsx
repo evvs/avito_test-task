@@ -9,6 +9,7 @@ import {
 } from '@redux_slices/currentNewsPageSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment } from '@fortawesome/free-regular-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 import Loader from '@components/Loader';
 import Comment from '@components/Comment';
 import { clearCommentsState } from '@redux_slices/commentsSlice';
@@ -52,11 +53,16 @@ const NewsPage = () => {
                 <p>{convertUnixDate(pageData.time)}</p>
               </div>
               <div>
-                <p>{pageData.url}</p>
-                <p>{pageData.by}</p>
+                <p className={s.linkContainer}><a href={pageData.url} target="_blank" rel="noreferrer">Link</a></p>
+                <p>
+                  <FontAwesomeIcon icon={faUser} className={s.iconText} />
+                  <span className={s.iconText}>{` ${pageData.by}`}</span>
+                </p>
                 <p>
                   <FontAwesomeIcon icon={faComment} className={s.icon} />
-                  <span className={s.iconText}>{pageData.rootCommentsCount}</span>
+                  <span className={s.iconText}>
+                    {pageData.rootCommentsCount}
+                  </span>
                 </p>
               </div>
             </div>

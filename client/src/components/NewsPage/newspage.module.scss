@@ -2,7 +2,7 @@
   position: fixed;
   height: 100%;
   width: 80%;
-  overflow-y: auto;
+  overflow: auto;
   top: 0;
   left: 50%;
   margin-left: -40%;
@@ -41,10 +41,22 @@
   }
   .icon {
     font-size: 2rem;
-    color:  rgba(159, 161, 166, 0.5);
+    color: rgba(159, 161, 166, 0.5);
   }
   .iconText {
-    color:  rgba(159, 161, 166, 0.5);
+    color: rgba(159, 161, 166, 0.5);
+  }
+  .linkContainer {
+    padding: 1rem 0;
+    text-align: center;
+    a:active,
+    a:hover,
+    a {
+      font-weight: bold;
+      font-size: 3rem;
+      text-decoration: none;
+      color:rgba(57, 168, 165, 1);
+    }
   }
 }
 .overlay {
