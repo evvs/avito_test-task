@@ -28,18 +28,6 @@ const currentNewsPageSlice = createSlice({
         isLoaded: true,
       };
     },
-    setComment: (state, action) => {
-      console.log('settt', action.payload);
-      try {
-        const { id, ...rest } = action.payload;
-        state.commentsById[id] = {
-          id,
-          ...rest,
-        };
-      } catch (err) {
-        console.log(err);
-      }
-    },
     clearPageNewsState: () => initialState,
   },
   extraReducers: {},

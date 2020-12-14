@@ -7,6 +7,8 @@ import {
   fetchNewsPageData,
   clearPageNewsState,
 } from '@redux_slices/currentNewsPageSlice';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faComment } from '@fortawesome/free-regular-svg-icons';
 import Loader from '@components/Loader';
 import Comment from '@components/Comment';
 import { clearCommentsState } from '@redux_slices/commentsSlice';
@@ -52,11 +54,16 @@ const NewsPage = () => {
               <div>
                 <p>{pageData.url}</p>
                 <p>{pageData.by}</p>
-                <p>{`comments count: ${pageData.rootCommentsCount}`}</p>
+                <p>
+                  <FontAwesomeIcon icon={faComment} className={s.icon} />
+                  <span className={s.iconText}>{pageData.rootCommentsCount}</span>
+                </p>
               </div>
             </div>
             <div className={s.commentsContainer}>
-              {pageData.kids.map((commId) => <Comment key={commId} id={commId} />)}
+              {pageData.kids.map((commId) => (
+                <Comment key={commId} id={commId} />
+              ))}
             </div>
           </>
         )}

@@ -12,10 +12,9 @@ export const fetchComment = createAsyncThunk(
   async (payload, { dispatch }) => {
     const { data } = await axios.get(routes.getItem(payload));
     if (!data) {
-      // in some cases we get empty(null) data, so retry after 2 sec
-      setTimeout(dispatch(fetchComment(payload)), 2000);
+      // in some cases we get empty(null) data, so retry after 15 sec
+      setTimeout(dispatch(fetchComment(payload)), 15000);
     }
-    console.log('feeeeetch', data);
     return data;
   },
 );
@@ -28,7 +27,6 @@ const fetchCommentSlice = createSlice({
   },
   extraReducers: {
     [fetchComment.fulfilled]: (state, action) => {
-      console.log('settt', action.payload);
       try {
         const { id, ...rest } = action.payload;
         state.commentsById[id] = {
@@ -38,6 +36,9 @@ const fetchCommentSlice = createSlice({
       } catch (err) {
         console.log(err);
       }
+    },
+    [fetchComment.rejected]: (state, action) => {
+      console.log(action);
     },
   },
 });

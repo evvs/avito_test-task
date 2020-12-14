@@ -13,7 +13,6 @@ const Comment = ({ id }) => {
     dispatch(fetchComment(id));
     console.log('comment effect');
   }, [id, dispatch]);
-  console.log('comment DDDDDDDDDDDDDDDAATA', data);
   return (
     <div>
       {!data ? (

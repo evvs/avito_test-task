@@ -21,8 +21,8 @@ export const fetchNewsCardInfo = createAsyncThunk(
   async (payload, { dispatch }) => {
     const { data } = await axios.get(routes.getItem(payload));
     if (!data) {
-      // in some cases we get empty(null) data, so retry after 2 sec
-      setTimeout(dispatch(fetchNewsCardInfo(payload)), 2000);
+      // in some cases we get empty(null) data, so retry after 15 sec
+      setTimeout(dispatch(fetchNewsCardInfo(payload)), 15000);
     }
     return { data };
   },
