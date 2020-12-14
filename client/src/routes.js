@@ -3,5 +3,5 @@ const prefix = 'v0';
 
 export default {
   getLatestNews: () => [host, prefix, 'newstories.json?print=pretty&orderBy=%22$key%22&limitToFirst=100'].join('/'),
-  getCardInfo: (id) => [host, prefix, `item/${id}.json?print=pretty`].join('/'),
+  getItem: (id) => [host, prefix, `item/${id}.json?print=pretty`].join('/'),
 };

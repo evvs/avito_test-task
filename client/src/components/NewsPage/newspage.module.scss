@@ -1,0 +1,36 @@
+.container {
+  position: fixed;
+  height: 100%;
+  width: 80%;
+  top: 0;
+  left: 50%;
+  margin-left: -40%;
+  padding: 1rem 3rem;
+  background-color: white;
+  z-index: 2;
+  word-wrap: break-word;
+  display: grid;
+  grid-template-rows: 1fr 3fr 5fr;
+  .title {
+    text-align: center;
+    h2 {
+      font-size: 30px;
+      word-break: break-word;
+    }
+    p {
+      color: rgba(159, 161, 166, 0.5);
+    }
+  }
+  @media screen and (max-width: 768px) {
+    padding: 0;
+    width: 100%;
+    margin-left: -50%;
+  }
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, .5);
+}

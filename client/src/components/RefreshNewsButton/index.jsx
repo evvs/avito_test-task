@@ -25,6 +25,7 @@ const RefreshButton = () => {
       onClick={onClickHandler}
       className={classes}
       onAnimationEnd={() => setActive(!active)}
+      title="sync"
     >
       <FontAwesomeIcon icon={faSyncAlt} />
     </button>

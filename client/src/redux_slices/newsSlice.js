@@ -11,7 +11,7 @@ const initialState = {
 export const fetchLatestNews = createAsyncThunk(
   'news/fetchLatestNews',
   // eslint-disable-next-line no-unused-vars
-  async (payload, thunkApi) => {
+  async (payload, { dispatch }) => {
     const { data } = await axios.get(routes.getLatestNews());
     return data;
   },
@@ -20,11 +20,12 @@ export const fetchLatestNews = createAsyncThunk(
 export const fetchNewsCardInfo = createAsyncThunk(
   'news/fetchNewsCardInfo',
   async (payload, { dispatch }) => {
-    const { data } = await axios.get(routes.getCardInfo(payload));
-    if (!data) { // in some cases we get empty(null) data, so retry after 2 sec
+    const { data } = await axios.get(routes.getItem(payload));
+    if (!data) {
+      // in some cases we get empty(null) data, so retry after 2 sec
       setTimeout(dispatch(fetchNewsCardInfo(payload)), 2000);
     }
-    return data;
+    return { data };
   },
 );
 
@@ -44,14 +45,15 @@ const newsSlice = createSlice({
     [fetchLatestNews.rejected]: (state, action) => {
       console.log(action);
     },
-    [fetchNewsCardInfo.fulfilled]: (state, action) => {
+    [fetchNewsCardInfo.fulfilled]: (state, { payload: { data } }) => {
       try {
-        const { id, ...rest } = action.payload;
+        const { id, ...rest } = data;
         state.newsById[id] = {
           id,
           ...rest,
         };
-      } catch (err) { // it usually appears when user spams refresh button
+      } catch (err) {
+        // it usually appears when user spams refresh button
         console.log(err);
       }
     },

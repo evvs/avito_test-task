@@ -1,12 +1,10 @@
 .container {
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   min-height: 10rem;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
   h3 {
     text-align: center;
     word-wrap: break-word;
@@ -14,4 +12,16 @@
   .cardIcon {
     color: rgba(159, 161, 166, 0.5);
   }
+  a {
+    color: black;
+    text-decoration: none;
+  }
+}
+.innerFlex {
+  flex-grow: 1;
+  display: flex;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 }

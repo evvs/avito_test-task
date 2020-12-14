@@ -1,14 +1,15 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 import Header from './components/Header';
-import News from './components/News';
+import NewsList from './components/NewsList';
 
-function App() {
-  return (
-    <div className="App">
-      <Header />
-      <News />
-    </div>
-  );
-}
+const App = () => (
+  <div className="App">
+    <Header />
+    <Route path={['/news/:id', '/']}>
+      <NewsList />
+    </Route>
+  </div>
+);
 
 export default App;

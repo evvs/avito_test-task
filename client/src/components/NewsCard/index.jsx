@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faClock, faStar } from '@fortawesome/free-solid-svg-icons';
 import { fetchNewsCardInfo, removeFromState } from '@redux_slices/newsSlice';
@@ -8,8 +9,7 @@ import s from './newscard.module.scss';
 import convertUnixDate from '../../utils';
 
 const NewsCard = ({ id }) => {
-  const data = useSelector((state) => state.news.newsById[id] ?? 'loading');
-  // const [loading, setLoading] = useState(true);
+  const data = useSelector((state) => state.news.newsById[id]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,17 +19,12 @@ const NewsCard = ({ id }) => {
     };
   }, [id, dispatch]);
 
-  // useEffect(() => {
-  // eslint-disable-next-line no-unneeded-ternary
-  //   setLoading(data ? false : true);
-  // }, [data]);
-
   return (
     <div className={s.container}>
-      {data === 'loading' ? (
+      {!data ? (
         <Loader />
       ) : (
-        <>
+        <Link to={`/news/${id}`} className={s.innerFlex}>
           <h3>{data.title}</h3>
           <div style={{ textAlign: 'center' }}>
             <p>
@@ -45,7 +40,7 @@ const NewsCard = ({ id }) => {
               {` ${convertUnixDate(data.time)}`}
             </p>
           </div>
-        </>
+        </Link>
       )}
     </div>
   );
