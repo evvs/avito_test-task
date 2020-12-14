@@ -5,6 +5,7 @@ import BackHomeButton from '@components/BackHomeButton';
 import {
   setPageInfo,
   fetchNewsPageData,
+  clearPageNewsState,
 } from '@redux_slices/currentNewsPageSlice';
 import Loader from '@components/Loader';
 import s from './newspage.module.scss';
@@ -20,6 +21,9 @@ const NewsPage = () => {
   useEffect(() => {
     if (preloadData) dispatch(setPageInfo(preloadData));
     else dispatch(fetchNewsPageData(id));
+    return () => {
+      dispatch(clearPageNewsState());
+    };
   }, [dispatch, id, preloadData]);
 
   const hidePageHandler = () => {
@@ -29,7 +33,7 @@ const NewsPage = () => {
   return (
     <>
       <div className={s.container}>
-        {pageData.isLoading ? (
+        {!pageData.isLoaded ? (
           <Loader />
         ) : (
           <>

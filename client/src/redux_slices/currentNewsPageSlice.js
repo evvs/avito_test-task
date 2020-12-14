@@ -9,9 +9,9 @@ const initialState = {
   url: '',
   by: '',
   rootCommentsCount: 0,
-  commentsById: { 1: 2, 3: 5, 6: 7 },
+  commentsById: {},
   kids: [],
-  isLoading: true,
+  isLoaded: false,
 };
 
 export const fetchComment = createAsyncThunk(
@@ -34,21 +34,25 @@ const currentNewsPageSlice = createSlice({
       const kids = payload.kids ? payload.kids : [];
       const rootCommentsCount = kids.length;
       return {
-        ...state, ...payload, kids, rootCommentsCount, isLoading: false,
+        ...state,
+        ...payload,
+        kids,
+        rootCommentsCount,
+        isLoaded: true,
       };
     },
+    clearPageNewsState: () => initialState,
   },
   extraReducers: {},
 });
 
-export const { setPageInfo } = currentNewsPageSlice.actions;
+export const { setPageInfo, clearPageNewsState } = currentNewsPageSlice.actions;
 export default currentNewsPageSlice.reducer;
 
 export const fetchNewsPageData = createAsyncThunk(
   'comments/fetchComment',
   async (payload, { dispatch }) => {
     const { data } = await axios.get(routes.getItem(payload));
-    console.log(data);
     dispatch(setPageInfo(data));
   },
 );
