@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { fetchLatestNews } from '@redux_slices/newsSlice';
 import NewsCard from '@components/NewsCard';
-import NewsPage from '@components/NewsPage';
 import Loader from '@components/Loader';
+import NewsPage from '@components/NewsPage';
 import s from './newslist.module.scss';
 
 const News = () => {
@@ -24,6 +24,10 @@ const News = () => {
   }, [dispatch]);
 
   useEffect(() => {
+    console.log('render news block');
+  });
+
+  useEffect(() => {
     if (pathId) document.body.style.overflow = 'hidden';
     else document.body.style.overflow = 'auto';
 
@@ -31,10 +35,6 @@ const News = () => {
       document.body.style.overflow = 'auto';
     };
   }, [pathId]);
-
-  useEffect(() => {
-    console.log('render news block');
-  });
 
   return (
     <main>

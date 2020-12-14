@@ -9,30 +9,17 @@ const initialState = {
   url: '',
   by: '',
   rootCommentsCount: 0,
-  commentsById: {},
   kids: [],
   isLoaded: false,
 };
 
-export const fetchComment = createAsyncThunk(
-  'comments/fetchComment',
-  async (payload, { dispatch }) => {
-    const { data } = await axios.get(routes.getItem(payload));
-    if (!data) {
-      // in some cases we get empty(null) data, so retry after 2 sec
-      setTimeout(dispatch(fetchComment(payload)), 2000);
-    }
-    return { data };
-  },
-);
-
 const currentNewsPageSlice = createSlice({
-  name: 'comments',
+  name: 'currentNewsPage',
   initialState,
   reducers: {
     setPageInfo: (state, { payload }) => {
       const kids = payload.kids ? payload.kids : [];
-      const rootCommentsCount = kids.length;
+      const rootCommentsCount = payload.descendants;
       return {
         ...state,
         ...payload,
@@ -40,6 +27,18 @@ const currentNewsPageSlice = createSlice({
         rootCommentsCount,
         isLoaded: true,
       };
+    },
+    setComment: (state, action) => {
+      console.log('settt', action.payload);
+      try {
+        const { id, ...rest } = action.payload;
+        state.commentsById[id] = {
+          id,
+          ...rest,
+        };
+      } catch (err) {
+        console.log(err);
+      }
     },
     clearPageNewsState: () => initialState,
   },
@@ -50,7 +49,7 @@ export const { setPageInfo, clearPageNewsState } = currentNewsPageSlice.actions;
 export default currentNewsPageSlice.reducer;
 
 export const fetchNewsPageData = createAsyncThunk(
-  'comments/fetchComment',
+  'currentNewsPage/fetchNewsPageData',
   async (payload, { dispatch }) => {
     const { data } = await axios.get(routes.getItem(payload));
     dispatch(setPageInfo(data));

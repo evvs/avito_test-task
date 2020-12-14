@@ -3,12 +3,18 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
-import newsReducer from './redux_slices/newsSlice';
-import currentNewsPage from './redux_slices/currentNewsPageSlice';
+import newsReducer from '@redux_slices/newsSlice';
+import currentNewsPageReducer from '@redux_slices/currentNewsPageSlice';
+import commentsReduce from '@redux_slices/commentsSlice';
+
 import './globalStyles.scss';
 import App from './App';
 
-const rootReducer = { news: newsReducer, currentNewsPage };
+const rootReducer = {
+  news: newsReducer,
+  currentNewsPage: currentNewsPageReducer,
+  comments: commentsReduce,
+};
 const store = configureStore({ reducer: rootReducer });
 
 ReactDOM.render(

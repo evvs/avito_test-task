@@ -52,7 +52,6 @@ const newsSlice = createSlice({
           ...rest,
         };
       } catch (err) {
-        // it usually appears when user spams refresh button
         console.log(err);
       }
     },

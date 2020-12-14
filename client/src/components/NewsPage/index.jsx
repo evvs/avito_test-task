@@ -8,6 +8,8 @@ import {
   clearPageNewsState,
 } from '@redux_slices/currentNewsPageSlice';
 import Loader from '@components/Loader';
+import Comment from '@components/Comment';
+import { clearCommentsState } from '@redux_slices/commentsSlice';
 import s from './newspage.module.scss';
 import convertUnixDate from '../../utils';
 
@@ -23,8 +25,10 @@ const NewsPage = () => {
     else dispatch(fetchNewsPageData(id));
     return () => {
       dispatch(clearPageNewsState());
+      dispatch(clearCommentsState());
     };
   }, [dispatch, id, preloadData]);
+  console.log('RENDER PAGE');
 
   const hidePageHandler = () => {
     location.push('/');
@@ -40,15 +44,7 @@ const NewsPage = () => {
             <div>
               <BackHomeButton onClick={hidePageHandler} />
             </div>
-            <div
-              style={{
-                outline: '1px solid red',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                flexWrap: 'wrap',
-              }}
-            >
+            <div className={s.infoContainer}>
               <div className={s.title}>
                 <h2>{pageData.title}</h2>
                 <p>{convertUnixDate(pageData.time)}</p>
@@ -58,6 +54,9 @@ const NewsPage = () => {
                 <p>{pageData.by}</p>
                 <p>{`comments count: ${pageData.rootCommentsCount}`}</p>
               </div>
+            </div>
+            <div className={s.commentsContainer}>
+              {pageData.kids.map((commId) => <Comment key={commId} id={commId} />)}
             </div>
           </>
         )}
