@@ -10,8 +10,7 @@ const initialState = {
 
 export const fetchLatestNews = createAsyncThunk(
   'news/fetchLatestNews',
-  // eslint-disable-next-line no-unused-vars
-  async (payload, { dispatch }) => {
+  async () => {
     const { data } = await axios.get(routes.getLatestNews());
     return data;
   },
