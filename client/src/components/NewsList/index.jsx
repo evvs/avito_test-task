@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
-import { fetchLatestNews } from '@redux_slices/newsSlice';
-import NewsCard from '@components/NewsCard';
-import Loader from '@components/Loader';
-import NewsPage from '@components/NewsPage';
+import { fetchLatestNews } from '../../redux_slices/newsSlice';
+import NewsCard from '../NewsCard';
+import Loader from '../Loader';
+import NewsPage from '../NewsPage';
 import s from './newslist.module.scss';
 
 const News = () => {

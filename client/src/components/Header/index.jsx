@@ -1,6 +1,6 @@
 import React from 'react';
-import headerLogo from '@img/hacker.svg';
-import RefreshNewsButton from '@components/RefreshNewsButton';
+import headerLogo from '../../img/hacker.svg';
+import RefreshNewsButton from '../RefreshNewsButton';
 import s from './header.module.scss';
 
 const Header = () => (

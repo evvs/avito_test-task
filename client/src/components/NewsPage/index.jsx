@@ -1,18 +1,19 @@
 import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import BackHomeButton from '@components/BackHomeButton';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faComment } from '@fortawesome/free-regular-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 import {
   setPageInfo,
   fetchNewsPageData,
   clearPageNewsState,
-} from '@redux_slices/currentNewsPageSlice';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment } from '@fortawesome/free-regular-svg-icons';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
-import Loader from '@components/Loader';
-import Comment from '@components/Comment';
-import { setRootCommentsIds, clearCommentsState } from '@redux_slices/commentsSlice';
+} from '../../redux_slices/currentNewsPageSlice';
+import Loader from '../Loader';
+import Comment from '../Comment';
+import BackHomeButton from '../BackHomeButton';
+import { setRootCommentsIds, clearCommentsState } from '../../redux_slices/commentsSlice';
 import s from './newspage.module.scss';
 import convertUnixDate from '../../utils';
 

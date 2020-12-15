@@ -3,11 +3,11 @@
 /* eslint-disable max-len */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchComment, toggleIsOpen } from '@redux_slices/commentsSlice';
-import Loader from '@components/Loader';
 import { faChevronDown, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment } from '@fortawesome/free-regular-svg-icons';
+import { fetchComment, toggleIsOpen } from '../../redux_slices/commentsSlice';
+import Loader from '../Loader';
 import convertUnixDate from '../../utils';
 import s from './comments.module.scss';
 
