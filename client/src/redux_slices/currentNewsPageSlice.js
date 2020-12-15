@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { setRootCommentsIds } from './commentsSlice';
 import routes from '../routes';
 
 const initialState = {
@@ -8,8 +9,6 @@ const initialState = {
   time: 0,
   url: '',
   by: '',
-  rootCommentsCount: 0,
-  kids: [],
   isLoaded: false,
 };
 
@@ -17,20 +16,20 @@ const currentNewsPageSlice = createSlice({
   name: 'currentNewsPage',
   initialState,
   reducers: {
+    // eslint-disable-next-line arrow-body-style
     setPageInfo: (state, { payload }) => {
-      const kids = payload.kids ? payload.kids : [];
-      const rootCommentsCount = payload.descendants;
+      // const kids = payload.kids ? payload.kids : [];
+
       return {
         ...state,
         ...payload,
-        kids,
-        rootCommentsCount,
         isLoaded: true,
       };
     },
     clearPageNewsState: () => initialState,
   },
-  extraReducers: {},
+  extraReducers: {
+  },
 });
 
 export const { setPageInfo, clearPageNewsState } = currentNewsPageSlice.actions;
@@ -40,6 +39,7 @@ export const fetchNewsPageData = createAsyncThunk(
   'currentNewsPage/fetchNewsPageData',
   async (payload, { dispatch }) => {
     const { data } = await axios.get(routes.getItem(payload));
+    dispatch(setRootCommentsIds(data));
     dispatch(setPageInfo(data));
   },
 );

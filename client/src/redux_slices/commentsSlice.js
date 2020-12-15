@@ -3,6 +3,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import routes from '../routes';
 
 const initialState = {
+  rootCommentsIds: [],
   commentsById: {},
   commentsUIstate: {},
 };
@@ -11,9 +12,10 @@ export const fetchComment = createAsyncThunk(
   'fetchComment/fetchingComment',
   async (payload, { dispatch }) => {
     const { data } = await axios.get(routes.getItem(payload));
+    console.log('FEEEETCH COMMENT');
     if (!data) {
-      // in some cases we get empty(null) data, so retry after 15 sec
-      setTimeout(dispatch(fetchComment(payload)), 15000);
+      // in some cases we get empty(null) data, so retry after 2 sec
+      setTimeout(dispatch(fetchComment(payload)), 2000);
     }
     return data;
   },
@@ -26,6 +28,10 @@ const fetchCommentSlice = createSlice({
     clearCommentsState: () => initialState,
     toggleIsOpen: ({ commentsUIstate }, { payload: id }) => {
       commentsUIstate[id].isOpen = !commentsUIstate[id].isOpen;
+    },
+    setRootCommentsIds: (state, action) => {
+      console.log(action.payload);
+      state.rootCommentsIds = action.payload.kids ? action.payload.kids : [];
     },
   },
   extraReducers: {
@@ -50,6 +56,6 @@ const fetchCommentSlice = createSlice({
   },
 });
 
-export const { clearCommentsState, toggleIsOpen } = fetchCommentSlice.actions;
+export const { clearCommentsState, toggleIsOpen, setRootCommentsIds } = fetchCommentSlice.actions;
 
 export default fetchCommentSlice.reducer;

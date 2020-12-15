@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import BackHomeButton from '@components/BackHomeButton';
 import {
   setPageInfo,
@@ -12,7 +12,7 @@ import { faComment } from '@fortawesome/free-regular-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import Loader from '@components/Loader';
 import Comment from '@components/Comment';
-import { clearCommentsState } from '@redux_slices/commentsSlice';
+import { setRootCommentsIds, clearCommentsState } from '@redux_slices/commentsSlice';
 import s from './newspage.module.scss';
 import convertUnixDate from '../../utils';
 
@@ -22,15 +22,23 @@ const NewsPage = () => {
   const { id } = useParams();
   const preloadData = useSelector((state) => state.news.newsById[id]);
   const pageData = useSelector((state) => state.currentNewsPage);
+  const { rootCommentsIds } = useSelector((state) => state.comments, shallowEqual);
 
   useEffect(() => {
-    if (preloadData) dispatch(setPageInfo(preloadData));
-    else dispatch(fetchNewsPageData(id));
+    if (preloadData) {
+      dispatch(setPageInfo(preloadData));
+      dispatch(setRootCommentsIds(preloadData));
+    } else dispatch(fetchNewsPageData(id));
     return () => {
       dispatch(clearPageNewsState());
-      dispatch(clearCommentsState());
     };
   }, [dispatch, id, preloadData]);
+
+  useEffect(() => () => {
+    console.log('UUUUNMOUNT');
+    dispatch(clearCommentsState());
+  }, [dispatch]);
+
   console.log('RENDER PAGE');
 
   const hidePageHandler = () => {
@@ -53,7 +61,11 @@ const NewsPage = () => {
                 <p>{convertUnixDate(pageData.time)}</p>
               </div>
               <div>
-                <p className={s.linkContainer}><a href={pageData.url} target="_blank" rel="noreferrer">Link</a></p>
+                <p className={s.linkContainer}>
+                  <a href={pageData.url} target="_blank" rel="noreferrer">
+                    Link
+                  </a>
+                </p>
                 <p>
                   <FontAwesomeIcon icon={faUser} className={s.iconText} />
                   <span className={s.iconText}>{` ${pageData.by}`}</span>
@@ -61,13 +73,13 @@ const NewsPage = () => {
                 <p>
                   <FontAwesomeIcon icon={faComment} className={s.icon} />
                   <span className={s.iconText}>
-                    {pageData.rootCommentsCount}
+                    {rootCommentsIds.length}
                   </span>
                 </p>
               </div>
             </div>
             <div className={s.commentsContainer}>
-              {pageData.kids.map((commId) => (
+              {rootCommentsIds.map((commId) => (
                 <Comment key={commId} id={commId} />
               ))}
             </div>

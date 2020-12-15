@@ -17,7 +17,6 @@ const Comment = ({ id }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchComment(id));
-    console.log('comment effect');
   }, [id, dispatch]);
 
   const onOpenHandler = () => {
