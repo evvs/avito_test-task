@@ -36,11 +36,8 @@ const NewsPage = () => {
   }, [dispatch, id, preloadData]);
 
   useEffect(() => () => {
-    console.log('UUUUNMOUNT');
     dispatch(clearCommentsState());
   }, [dispatch]);
-
-  console.log('RENDER PAGE');
 
   const hidePageHandler = () => {
     location.push('/');

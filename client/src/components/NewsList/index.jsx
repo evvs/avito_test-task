@@ -15,17 +15,12 @@ const News = () => {
   useEffect(() => {
     dispatch(fetchLatestNews());
     const intervalId = setInterval(() => {
-      console.log('from interval');
       dispatch(fetchLatestNews());
     }, 60000);
     return () => {
       clearInterval(intervalId);
     };
   }, [dispatch]);
-
-  useEffect(() => {
-    console.log('render news block');
-  });
 
   useEffect(() => {
     if (pathId) document.body.style.overflow = 'hidden';
@@ -37,7 +32,8 @@ const News = () => {
   }, [pathId]);
 
   return (
-    <main>
+    // eslint-disable-next-line max-len
+    <main style={{ marginRight: pathId ? window.innerWidth - document.documentElement.clientWidth : 0 }}>
       {pathId && <NewsPage />}
       <div className={s.container}>
         {!newsIds.length ? (
