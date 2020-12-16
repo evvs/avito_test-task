@@ -45,7 +45,7 @@ const NewsPage = () => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       dispatch(refreshRootComments({ id }));
-    }, 2000);
+    }, 60000);
     return () => {
       clearInterval(intervalId);
     };
