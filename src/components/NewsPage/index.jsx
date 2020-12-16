@@ -4,7 +4,6 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment } from '@fortawesome/free-regular-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-// import { createSelector } from 'reselect';
 import {
   setPageInfo,
   fetchNewsPageData,
@@ -92,12 +91,16 @@ const NewsPage = () => {
                   <FontAwesomeIcon icon={faComment} className={s.icon} />
                   <span className={s.iconText}>{rootCommentsIds.length}</span>
                 </p>
+                <div className={s.refreshBtnContainer}>
+                  <span className={s.refreshBtn}>
+                    <RefreshButton
+                      refreshfunc={() => dispatch(refreshRootComments({ id }))}
+                    />
+                  </span>
+                </div>
               </div>
             </div>
             <div className={s.commentsContainer}>
-              <div>
-                <RefreshButton refreshfunc={() => dispatch(refreshRootComments({ id }))} />
-              </div>
               {rootCommentsIds.map((commId) => (
                 <Comment key={commId} id={commId} />
               ))}

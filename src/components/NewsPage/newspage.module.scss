@@ -58,6 +58,13 @@
       color:rgba(57, 168, 165, 1);
     }
   }
+  .refreshBtnContainer {
+    display: flex;
+    justify-content: flex-end;
+      .refreshBtn {
+        margin-right: 20px;
+      }
+  }
 }
 .overlay {
   position: fixed;
