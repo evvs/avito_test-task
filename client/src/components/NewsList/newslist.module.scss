@@ -3,9 +3,12 @@ main {
     padding: 10px 50px;
     min-height: 80vh;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     grid-column-gap: 48px;
     grid-row-gap: 48px;
     align-items: end;
+    @media screen and (max-width: 576px) {
+      padding: 0;
+    }
   }
 }

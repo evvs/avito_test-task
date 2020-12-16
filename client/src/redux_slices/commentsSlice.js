@@ -14,8 +14,8 @@ export const fetchComment = createAsyncThunk(
     const { data } = await axios.get(routes.getItem(payload));
     console.log('FEEEETCH COMMENT');
     if (!data) {
-      // in some cases we get empty(null) data, so retry after 2 sec
-      setTimeout(dispatch(fetchComment(payload)), 2000);
+      // in some cases we get empty(null) data, so retry after 5 sec
+      setTimeout(dispatch(fetchComment(payload)), 5000);
     }
     return data;
   },
@@ -30,8 +30,8 @@ const fetchCommentSlice = createSlice({
       commentsUIstate[id].isOpen = !commentsUIstate[id].isOpen;
     },
     setRootCommentsIds: (state, action) => {
-      console.log(action.payload);
       state.rootCommentsIds = action.payload.kids ? action.payload.kids : [];
+      console.log('setRootCommentsIds', state.rootCommentsIds);
     },
   },
   extraReducers: {
@@ -59,3 +59,16 @@ const fetchCommentSlice = createSlice({
 export const { clearCommentsState, toggleIsOpen, setRootCommentsIds } = fetchCommentSlice.actions;
 
 export default fetchCommentSlice.reducer;
+
+export const refreshRootComments = createAsyncThunk(
+  'fetchComment/refreshRootComments',
+  async (payload, { dispatch }) => {
+    const { data } = await axios.get(routes.getItem(payload.id));
+    console.log('UPDATE COMMENTS');
+    if (!data) {
+      // in some cases we get empty(null) data, so retry after 5 sec
+      setTimeout(dispatch(refreshRootComments(payload.id)), 5000);
+    }
+    dispatch(setRootCommentsIds(data));
+  },
+);
