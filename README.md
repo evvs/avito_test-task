@@ -1,4 +1,6 @@
 https://hacker-news-ui.vercel.app/
 
-Latest news and comments update every 60000ms. Or you can refresh it with refresh buttons.
+news with comments http://localhost:3000/news/25422003
+
+Latest news and news root comments update every 60000ms. Or you can refresh it with refresh buttons.
 

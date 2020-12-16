@@ -12,7 +12,6 @@ export const fetchComment = createAsyncThunk(
   'fetchComment/fetchingComment',
   async (payload, { dispatch }) => {
     const { data } = await axios.get(routes.getItem(payload));
-    console.log('FEEEETCH COMMENT');
     if (!data) {
       // in some cases we get empty(null) data, so retry after 5 sec
       setTimeout(dispatch(fetchComment(payload)), 5000);
@@ -63,7 +62,6 @@ export const refreshRootComments = createAsyncThunk(
   'fetchComment/refreshRootComments',
   async (payload, { dispatch }) => {
     const { data } = await axios.get(routes.getItem(payload.id));
-    console.log('REFRESH ROOT COMMENTS');
     if (!data) {
       // in some cases we get empty(null) data, so retry after 5 sec
       setTimeout(dispatch(refreshRootComments(payload.id)), 5000);

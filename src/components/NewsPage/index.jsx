@@ -52,10 +52,6 @@ const NewsPage = () => {
     };
   }, [dispatch, id]);
 
-  useEffect(() => {
-    console.log('RERENDER PAGE', rootCommentsIds);
-  });
-
   useEffect(
     () => () => {
       dispatch(clearCommentsState());
