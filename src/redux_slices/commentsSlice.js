@@ -31,7 +31,6 @@ const fetchCommentSlice = createSlice({
     },
     setRootCommentsIds: (state, action) => {
       state.rootCommentsIds = action.payload.kids ? action.payload.kids : [];
-      console.log('setRootCommentsIds', state.rootCommentsIds);
     },
   },
   extraReducers: {
@@ -64,7 +63,7 @@ export const refreshRootComments = createAsyncThunk(
   'fetchComment/refreshRootComments',
   async (payload, { dispatch }) => {
     const { data } = await axios.get(routes.getItem(payload.id));
-    console.log('UPDATE COMMENTS');
+    console.log('REFRESH ROOT COMMENTS');
     if (!data) {
       // in some cases we get empty(null) data, so retry after 5 sec
       setTimeout(dispatch(refreshRootComments(payload.id)), 5000);

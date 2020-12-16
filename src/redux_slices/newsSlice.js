@@ -11,6 +11,7 @@ const initialState = {
 export const fetchLatestNews = createAsyncThunk(
   'news/fetchLatestNews',
   async () => {
+    console.log('REFRESH NEWS');
     const { data } = await axios.get(routes.getLatestNews());
     return data;
   },

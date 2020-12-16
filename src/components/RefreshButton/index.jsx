@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSyncAlt } from '@fortawesome/free-solid-svg-icons';
 import cn from 'classnames';
-import { fetchLatestNews } from '../../redux_slices/newsSlice';
 import s from './refreshbutton.module.scss';
 
-const RefreshButton = () => {
-  const dispatch = useDispatch();
+const RefreshButton = ({ refreshfunc }) => {
   const [active, setActive] = useState(false);
 
   const onClickHandler = () => {
-    dispatch(fetchLatestNews());
+    refreshfunc();
     setActive(!active);
   };
 

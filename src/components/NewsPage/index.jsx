@@ -13,6 +13,7 @@ import {
 import Loader from '../Loader';
 import Comment from '../Comment';
 import BackHomeButton from '../BackHomeButton';
+import RefreshButton from '../RefreshButton';
 import {
   setRootCommentsIds,
   clearCommentsState,
@@ -98,6 +99,9 @@ const NewsPage = () => {
               </div>
             </div>
             <div className={s.commentsContainer}>
+              <div>
+                <RefreshButton refreshfunc={() => dispatch(refreshRootComments({ id }))} />
+              </div>
               {rootCommentsIds.map((commId) => (
                 <Comment key={commId} id={commId} />
               ))}
